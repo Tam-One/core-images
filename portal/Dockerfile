@@ -41,7 +41,7 @@ RUN /usr/bin/caddy -version
 RUN /usr/bin/caddy -plugins
 
 # Add caddy configuration
-ADD ./build/docker/Caddyfile /etc/Caddyfile
+ADD Caddyfile /etc/Caddyfile
 
 # Copy caddy from parent image
 COPY --from=builder /go/bin/parent /bin/parent
