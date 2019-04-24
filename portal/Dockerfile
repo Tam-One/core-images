@@ -33,8 +33,7 @@ ENV TZ=Europe/Amsterdam
 
 RUN apk --update add \
     tzdata \
-  && cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-  && apk del tzdata
+  && cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Fix iconv on alpinelinux
 RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community gnu-libiconv

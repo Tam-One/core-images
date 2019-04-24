@@ -9,8 +9,7 @@ ENV TZ=Europe/Amsterdam
 
 RUN apk --update add \
 		tzdata \
-	&& cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-	&& apk del tzdata
+	&& cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Required dependencies
 RUN apk --no-cache add zeromq-dev \
