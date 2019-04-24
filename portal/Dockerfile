@@ -29,6 +29,13 @@ RUN apk --no-cache --virtual temp add build-base \
     docker-php-ext-install opcache && \
     apk del temp
 
+ENV TZ=Europe/Amsterdam
+
+RUN apk --update add \
+    tzdata \
+  && cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+  && apk del tzdata
+
 # Fix iconv on alpinelinux
 RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
