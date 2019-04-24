@@ -5,6 +5,14 @@ RUN apk --no-cache --virtual temp add build-base \
                        autoconf \
                        curl
 
+ENV TZ=Europe/Amsterdam
+
+RUN apk --update add \
+		tzdata \
+	&& cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+	&& apk del tzdata \
+	&& ntpd -d -q -n -p uk.pool.ntp.org
+
 # Required dependencies
 RUN apk --no-cache add zeromq-dev \
                        python2 && \
