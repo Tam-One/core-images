@@ -9,6 +9,22 @@ RUN go get -v github.com/abiosoft/parent
 
 RUN VERSION=${version} PLUGINS=${plugins} /bin/sh /usr/bin/builder.sh
 
+# Let's Encrypt Agreement
+ENV ACME_AGREE="false"
+
+# Telemetry Stats
+ENV ENABLE_TELEMETRY="false"
+
+# Validate install
+RUN /usr/bin/caddy -version
+RUN /usr/bin/caddy -plugins
+
+EXPOSE 80 443
+WORKDIR /srv
+
+ENTRYPOINT ["/bin/parent", "caddy"]
+CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
+
 # Build php-image
 FROM php:7.1-fpm-alpine
 
@@ -27,6 +43,7 @@ RUN apk --no-cache --virtual temp add build-base \
     docker-php-ext-install pcntl && \
     docker-php-ext-install bcmath && \
     docker-php-ext-install opcache && \
+    docker-php-ext-install sockets && \
     apk del temp
 
 ENV TZ=Europe/Amsterdam
