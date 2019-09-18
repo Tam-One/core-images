@@ -16,7 +16,7 @@ RUN apk --no-cache --virtual temp add build-base \
 # Required dependencies
 RUN apk --no-cache add zeromq-dev \
                        python2 && \
-                       base-devel && \
+                       build-base && \
     curl -Ls "https://github.com/dustinblackman/phantomized/releases/download/2.1.1/dockerized-phantomjs.tar.gz" | tar xz -C
 
 # Set python env variable
