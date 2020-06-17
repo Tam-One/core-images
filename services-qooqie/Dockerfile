@@ -1,4 +1,4 @@
-FROM node:12.18.0-alpine3.9
+FROM node:8.16-alpine
 
 # Set timezone
 ENV TZ=Europe/Amsterdam
